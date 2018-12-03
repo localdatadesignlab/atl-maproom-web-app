@@ -242,7 +242,12 @@ map.on('load', function() {
        }
     }, true);
 });
-
+/**
+* currently adding a new north arrow
+*
+*/
+const navigation = new mapboxgl.Navigation();
+    map.addControl(navigation);
 /** Initializes map and adds data sources and
  *  layers to the map.
  */

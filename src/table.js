@@ -106,6 +106,7 @@ document.getElementById('refreshTable').addEventListener('click', function(){
   socket.emit('refreshTable');
 });
 
+
 /* Sets current highlighted point, chosen by user
 */
   var currClick = -1;
@@ -116,6 +117,10 @@ document.getElementById('refreshTable').addEventListener('click', function(){
         $(this).removeClass('selected');
           //removes highlight from projector view
           socket.emit("removeMarker", {'removeMarker':tab.row(this).data()[0]});
+          controller(data);
+          //map.on('click', 'Property Assessment', function(e) {
+          console.log(e.features[0]);
+          //});
         currClick = -1;
       }
       else{

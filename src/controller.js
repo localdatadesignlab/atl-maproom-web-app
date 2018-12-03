@@ -206,9 +206,25 @@ document.getElementById('interactionButton').addEventListener('click', function(
 /**
  * adds BeltLine and data layer sources from MapBox GL Studio
  * and then adds the layers to the map to be toggled
+ * Also currently adding a new north arrow
  */
 map.on('load', function () {
-    // beltline layer
+    var nav = new mapboxgl.NavigationControl({
+      showCompass: true
+    });
+    var scale = new mapboxgl.ScaleControl({
+       maxWidth: 80,
+       unit: 'imperial'
+    });
+    map.addControl(scale);
+    scale.setUnit('imperial');
+    map.addControl(nav, 'bottom-left');
+    //map.addControl(scale, 'bottom-left');
+   /* 
+    map.addLayer({
+      'id': 'base',
+      'type': 'fill'
+    });*/
     map.addSource('beltline', {
         type: 'vector',
         url: 'mapbox://atlmaproom.9v2e99o9'
@@ -233,6 +249,7 @@ map.on('load', function () {
     map.addSource('ACS', {
         type: 'vector',
         url: 'mapbox://atlmaproom.c97zkvti'
+
     });
     map.addLayer({
         'id': 'Median Income Change',
@@ -318,7 +335,32 @@ map.on('load', function () {
             'line-opacity': 0.8
         }
     });
+    map.addLayer({
+    'id': 'ATLMaps:r9hrz',
+    'type': 'raster',
+    'source': {
+      'type': 'raster',
+      'tiles': [
+        'https://geoserver.ecds.emory.edu/ATLMaps/wms?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.0&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=ATLMaps:r9hrz'
+      ],
+      'tileSize': 256
+    }
+  });
+
+  map.addLayer({
+    'id': 'ATLMaps:r9jr2',
+    'type': 'raster',
+    'source': {
+      'type': 'raster',
+      'tiles': [
+        'https://geoserver.ecds.emory.edu/ATLMaps/wms?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.0&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=ATLMaps:r9jr2'
+      ],
+      'tileSize': 256
+    }
+  });
 });
+  
+
 
 /**
  * when the user interacts with the map (pinch/drag to move, zoom, or rotate)
@@ -330,11 +372,15 @@ map.on('moveend', function (e) {
                                 'bearing':map.getBearing(), 'geoCoordinates':getGeoCoordinates(),
                                 'activeRectangle':activeRectangle.id, 'endCenters':getEndCenters()})
 });
+map.on('click', 'Property Assessment', function(e) {
+      console.log(e.features[0]);
+      sock.emit("refreshTable", e.features[0]);
+});
 
 /**
  * link layers to buttons to toggle on screen
  */
-var toggleableLayerIds = [ 'Property Assessment', 'Median Income Change', 'College Educated Change', 'White Occupants Change', 'MARTA' ];
+var toggleableLayerIds = [ 'Property Assessment', 'Median Income Change', 'College Educated Change', 'White Occupants Change', 'MARTA', 'ATLMaps:r9hrz', 'ATLMaps:r9jr2'];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];
@@ -373,4 +419,5 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
 
     var layers = document.getElementById('menu');
     layers.appendChild(link);
+
 }

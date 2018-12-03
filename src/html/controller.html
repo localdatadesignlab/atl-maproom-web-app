@@ -9,11 +9,15 @@
   <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
   <style>
     body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
+    #map { position:absolute; top:0; bottom:0; width:100%; 
+    map.addControl(new mapboxgl.NavigationControl());}
+    
   </style>
 </head>
 
 <body>
+
+
   <style>
       #shortRect {
           width:900px;
@@ -145,6 +149,7 @@
           margin-right: 5px;
           width: 10px;
       }
+
   </style>
 
   <nav id="menu"></nav>
