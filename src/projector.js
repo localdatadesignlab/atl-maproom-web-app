@@ -242,16 +242,21 @@ map.on('load', function() {
        }
     }, true);
 });
-/**
-* currently adding a new north arrow
-*
-*/
-const navigation = new mapboxgl.Navigation();
-    map.addControl(navigation);
+
 /** Initializes map and adds data sources and
  *  layers to the map.
  */
 map.on('load', function () {
+      var nav = new mapboxgl.NavigationControl({
+      showCompass: true
+    });
+    var scale = new mapboxgl.ScaleControl({
+       maxWidth: 80,
+       unit: 'imperial'
+    });
+    map.addControl(scale);
+    scale.setUnit('imperial');
+    map.addControl(nav, 'bottom-left');
     // beltline layer
     map.addSource('beltline', {
         type: 'vector',
@@ -407,6 +412,29 @@ map.on('load', function () {
             'line-opacity': 0.15
         }
     });
+    map.addLayer({
+    'id': 'ATLMaps:r9hrz',
+    'type': 'raster',
+    'source': {
+      'type': 'raster',
+      'tiles': [
+        'https://geoserver.ecds.emory.edu/ATLMaps/wms?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.0&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=ATLMaps:r9hrz'
+      ],
+      'tileSize': 256
+    }
+  });
+
+  map.addLayer({
+    'id': 'ATLMaps:r9jr2',
+    'type': 'raster',
+    'source': {
+      'type': 'raster',
+      'tiles': [
+        'https://geoserver.ecds.emory.edu/ATLMaps/wms?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.0&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=ATLMaps:r9jr2'
+      ],
+      'tileSize': 256
+    }
+  });
 });
 
 // Disables interaction on the projector

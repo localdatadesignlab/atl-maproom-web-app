@@ -6,17 +6,14 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-var cors = require('cors');
-
 
 // Main server runs on this port, will be used by other scripts
 server.listen(8080);
-app.use(cors());
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
 
 /** The following methods provide GET functionality for
 *** the server, simplifying file locations for other scripts. */
