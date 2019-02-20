@@ -247,11 +247,12 @@ map.on('load', function() {
  *  layers to the map.
  */
 map.on('load', function () {
-      var nav = new mapboxgl.NavigationControl({
-      showCompass: true
+    var nav = new mapboxgl.NavigationControl({
+      showCompass: true,
+      showZoom: false
     });
     var scale = new mapboxgl.ScaleControl({
-       maxWidth: 80,
+       maxWidth: 150,
        unit: 'imperial'
     });
     map.addControl(scale);
