@@ -9,7 +9,7 @@
   <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
   <style>
     body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:75%;}
+    #map { position:fixed; top:0; bottom:0; width:75%;}
     .mapboxgl-ctrl-scale {
       font-size: 20px
     }
@@ -46,7 +46,7 @@
   </style>
 
   <div id='map' style="background-color:black"></div>
-  <div id="point_text" style="max-height:100%;color:white;background-color:black">
+  <div id="point_text" style="max-height:100%;color:white;background-color:black;overflow:scroll">
    <h5 id=ID_>ID</h5>
     <h6 id=ID>ID</h6><span></span>
     <h5 id=Latitude_>Latitude</h5>
