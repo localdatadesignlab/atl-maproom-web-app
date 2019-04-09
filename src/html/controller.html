@@ -76,6 +76,21 @@
           color: #fff;
           background: #2ECC71;
       }
+      
+      #manual-move {
+          position: absolute;
+          display: table;
+          table-layout:auto;
+          z-index: 1;
+          top: 400px;
+          right: 10px;
+          width: 175px;
+          font-family: 'Open Sans', sans-serif;
+      }
+
+      #move-button {
+        margin-right: 25px;
+      }
 
       #menu {
           background: #fff;
@@ -100,7 +115,7 @@
           border-bottom: 1px solid rgba(0,0,0,0.25);
           text-align: center;
       }
-
+    
       #menu a:last-child {
           border: none;
       }
@@ -148,9 +163,14 @@
   </style>
 
   <nav id="menu"></nav>
+  <div id="manual-move">
+    <button id='move-button' onclick="map.panBy([-2, 0])">L E F T</button>
+    <button id='move-button' onclick="map.panBy([2, 0])">R I G H T</button>
+  </div>
   <div id="map"></div>
   <canvas id="shortRect"></canvas>
   <canvas id="longRect"></canvas>
+  
   <div id='state-legend' class='legend'>
       <h4>Percent Change:</h4>
       <div><span style='background-color: #e92f2f '></span>100</div>
