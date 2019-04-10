@@ -79,7 +79,18 @@
       
       #manual-move {
           position: absolute;
-          display: table;
+          display: inline-block;
+          table-layout:auto;
+          z-index: 1;
+          top: 399px;
+          right: 10px;
+          width: 175px;
+          font-family: 'Open Sans', sans-serif;
+      }
+
+      #manual-single {
+          position: absolute;
+          display: inline-block;
           table-layout:auto;
           z-index: 1;
           top: 400px;
@@ -88,8 +99,14 @@
           font-family: 'Open Sans', sans-serif;
       }
 
-      #move-button {
-        margin-right: 25px;
+      #move-button-ud {
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+      }
+
+      #move-button-lr {
+        height: 40px;
       }
 
       #menu {
@@ -163,9 +180,15 @@
   </style>
 
   <nav id="menu"></nav>
+  <div id="manual-single" style="top: 390px">
+        <button id='move-button-ud' onclick="map.panBy([0, -2])">&uarr;</button>
+  </div>
   <div id="manual-move">
-    <button id='move-button' onclick="map.panBy([-2, 0])">L E F T</button>
-    <button id='move-button' onclick="map.panBy([2, 0])">R I G H T</button>
+    <button id='move-button-lr' onclick="map.panBy([-2, 0])" style='float: left;'>&larr;</button>
+    <button id='move-button-lr' onclick="map.panBy([2, 0])" style='float: right;'>&rarr;</button>
+  </div>
+  <div id="manual-single" style="top: 430px">
+        <button id='move-button-ud' onclick="map.panBy([0, 2])">&darr;</button>
   </div>
   <div id="map"></div>
   <canvas id="shortRect"></canvas>
